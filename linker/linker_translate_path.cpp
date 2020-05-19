@@ -114,7 +114,6 @@ bool translateSystemPathToApexPath(const char* name, std::string* out_name_to_ap
             std::find_if(std::begin(kPathTranslationQ), std::end(kPathTranslationQ), comparator);
         it != std::end(kPathTranslationQ)) {
       *out_name_to_apex = (*it)[1];
-      return (*it)[1];
       return true;
     }
   }
