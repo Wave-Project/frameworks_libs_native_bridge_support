@@ -14,8 +14,19 @@
 # limitations under the License.
 #
 
-# Add this to PRODUCT_PACKAGES for your project to facilitate native bridge support.
-NATIVE_BRIDGE_PRODUCT_PACKAGES :=
+#
+# This makefile exports
+#
+# NATIVE_BRIDGE_PRODUCT_PACKAGES: Add this to PRODUCT_PACKAGES for your project to facilitate
+# native bridge support.
+#
+# NATIVE_BRIDGE_MODIFIED_GUEST_LIBS: List of modified guest libraries that require host counterpart.
+#
+
+NATIVE_BRIDGE_PRODUCT_PACKAGES := \
+    libnative_bridge_vdso.native_bridge \
+    native_bridge_guest_app_process.native_bridge \
+    native_bridge_guest_linker.native_bridge
 
 # Original guest libraries.
 NATIVE_BRIDGE_ORIG_GUEST_LIBS := \
@@ -69,8 +80,38 @@ NATIVE_BRIDGE_ORIG_GUEST_LIBS += \
 #    libart \
 #    libvorbisidec
 
+
+NATIVE_BRIDGE_MODIFIED_GUEST_LIBS := \
+    libaaudio \
+    libamidi \
+    libandroid \
+    libandroid_runtime \
+    libbinder_ndk \
+    libc \
+    libcamera2ndk \
+    libEGL \
+    libGLESv1_CM \
+    libGLESv2 \
+    libGLESv3 \
+    libicui18n \
+    libicuuc \
+    libjnigraphics \
+    libmediandk \
+    libnativehelper \
+    libnativewindow \
+    libneuralnetworks \
+    libOpenMAXAL \
+    libOpenSLES \
+    libvulkan \
+    libwebviewchromium_plat_support
+
 # Original guest libraries are built for native_bridge
 NATIVE_BRIDGE_PRODUCT_PACKAGES += \
     $(addsuffix .native_bridge,$(NATIVE_BRIDGE_ORIG_GUEST_LIBS))
+
+# Modified guest libraries are built for native_bridge and
+# have special build target prefix
+NATIVE_BRIDGE_PRODUCT_PACKAGES += \
+    $(addprefix libnative_bridge_guest_,$(addsuffix .native_bridge,$(NATIVE_BRIDGE_MODIFIED_GUEST_LIBS)))
 
 NATIVE_BRIDGE_ORIG_GUEST_LIBS :=
