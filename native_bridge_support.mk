@@ -22,7 +22,6 @@ NATIVE_BRIDGE_ORIG_GUEST_LIBS := \
     libcompiler_rt \
     libcrypto \
     libcutils \
-    libdl.bootstrap \
     libdl_android.bootstrap \
     liblog \
     libm.bootstrap \
