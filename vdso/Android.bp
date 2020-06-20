@@ -18,13 +18,16 @@ cc_library_shared {
     name: "libnative_bridge_vdso",
     enabled: false,
     native_bridge_supported: true,
+    target: {
+       native_bridge: {
+           enabled: true,
+       }
+    },
     arch: {
         arm64: {
-            enabled: true,
             srcs: ["vdso_arm64.S"],
         },
         arm: {
-            enabled: true,
             srcs: ["vdso_arm.S"],
         },
     },
