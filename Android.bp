@@ -14,6 +14,12 @@
 // limitations under the License.
 //
 
+// We introduce this namespace so that native bridge guest libraries are built
+// only for targets that explicitly use this namespace via PRODUCT_SOONG_NAMESPACES
+// and checkbuild.
+soong_namespace {
+}
+
 cc_defaults {
     name: "native_bridge_stub_library_defaults",
     cflags: [
