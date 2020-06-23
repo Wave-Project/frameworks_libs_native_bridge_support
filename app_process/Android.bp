@@ -1,0 +1,16 @@
+cc_binary {
+    defaults: ["native_bridge_stub_library_defaults"],
+    name: "native_bridge_guest_app_process",
+    overrides: ["app_process"],
+    stem: "app_process",
+
+    srcs: [
+        "app_process.cc",
+    ],
+
+    multilib: {
+        lib64: {
+            suffix: "64",
+        },
+    },
+}
