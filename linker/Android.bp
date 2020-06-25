@@ -37,16 +37,19 @@ cc_binary {
     ],
 
     enabled: false,
+    target: {
+       native_bridge: {
+           enabled: true,
+       }
+    },
     arch: {
         arm: {
             srcs: ["init_static_tls_arm.S"],
             version_script: "linker.arm.map",
-            enabled: true,
         },
         arm64: {
             srcs: ["init_static_tls_arm64.S"],
             version_script: "linker.generic.map",
-            enabled: true,
         },
     },
 
