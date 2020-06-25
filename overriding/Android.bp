@@ -14,33 +14,8 @@
 // limitations under the License.
 //
 
-cc_defaults {
-    name: "native_bridge_stub_library_defaults",
-    cflags: [
-        "-Wall",
-        "-Werror",
-        "-Wextra",
-        "-Wover-aligned",
-        "-Wunused",
-    ],
-
-    shared_libs: [
-        "libnative_bridge_vdso",
-    ],
-
-    // TODO(b/24465209): keep stub libraries old loader-compatible.
-    ldflags: [
-        "-Wl,--hash-style=both",
-    ],
-    pack_relocations: false,
-
-    enabled: false,
-    target: {
-       native_bridge: {
-           enabled: true,
-       }
-    },
-
-    native_bridge_supported: true,
-    compile_multilib: "both",
+// We introduce this namespace so that native bridge guest libraries are built
+// only for targets that explicitly use this namespace via PRODUCT_SOONG_NAMESPACES
+// and checkbuild.
+soong_namespace {
 }
