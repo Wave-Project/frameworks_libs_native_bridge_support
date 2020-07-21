@@ -41,7 +41,6 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(android_getaddrinfofornet);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(android_getaddrinfofornetcontext);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(android_mallopt);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(android_set_abort_message);
-DEFINE_INTERCEPTABLE_STUB_FUNCTION(clone);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(freeaddrinfo);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(gai_strerror);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(getaddrinfo);
@@ -112,7 +111,6 @@ static void __attribute__((constructor(0))) init_stub_library() {
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", android_getaddrinfofornetcontext);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", android_mallopt);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", android_set_abort_message);
-  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", clone);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", freeaddrinfo);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", gai_strerror);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", getaddrinfo);
