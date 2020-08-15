@@ -16,10 +16,12 @@
 
 #include <unistd.h>
 
-#include "native_bridge_support/vdso/vdso.h"
-
 extern "C" void __loader_add_thread_local_dtor(void* dso_handle) __attribute__((weak));
 extern "C" void __loader_remove_thread_local_dtor(void* dso_handle) __attribute__((weak));
+
+extern "C" int native_bridge___cxa_thread_atexit_impl(void (*func)(void*),
+                                                      void* arg,
+                                                      void* dso_handle);
 
 struct WrappedArg {
   typedef void (*thread_atexit_fn_t)(void*);
@@ -53,9 +55,5 @@ extern "C" int __cxa_thread_atexit_impl(void (*func)(void*), void* arg, void* ds
     __loader_add_thread_local_dtor(dso_handle);
   }
 
-  typedef decltype(__cxa_thread_atexit_impl)* fn_t;
-  static fn_t __host_cxa_thread_atexit_impl = reinterpret_cast<fn_t>(
-      native_bridge_find_proxy_library_symbol("libc.so", "__cxa_thread_atexit_impl"));
-
-  return __host_cxa_thread_atexit_impl(WrappedFn, wrapped_arg, dso_handle);
+  return native_bridge___cxa_thread_atexit_impl(WrappedFn, wrapped_arg, dso_handle);
 }

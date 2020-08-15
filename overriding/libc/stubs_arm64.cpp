@@ -17,6 +17,8 @@
 // clang-format off
 #include "native_bridge_support/vdso/interceptable_functions.h"
 
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(__clone_for_fork);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(__get_thread_stack_top);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__pthread_cleanup_pop);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__pthread_cleanup_push);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__system_properties_init);
@@ -45,6 +47,22 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(freeaddrinfo);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(gai_strerror);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(getaddrinfo);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(longjmp);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge___cxa_thread_atexit_impl);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_aligned_alloc);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_calloc);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_exit);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_free);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_mallinfo);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc_disable);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc_enable);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc_info_helper);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc_iterate);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_malloc_usable_size);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_mallopt);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_memalign);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_posix_memalign);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_realloc);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(pthread_attr_destroy);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(pthread_attr_getdetachstate);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(pthread_attr_getguardsize);
@@ -87,6 +105,8 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(sigsetjmp);
 DEFINE_INTERCEPTABLE_STUB_VARIABLE(environ);
 
 static void __attribute__((constructor(0))) init_stub_library() {
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __clone_for_fork);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __get_thread_stack_top);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __pthread_cleanup_pop);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __pthread_cleanup_push);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __system_properties_init);
@@ -115,6 +135,22 @@ static void __attribute__((constructor(0))) init_stub_library() {
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", gai_strerror);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", getaddrinfo);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", longjmp);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge___cxa_thread_atexit_impl);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_aligned_alloc);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_calloc);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_exit);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_free);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_mallinfo);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc_disable);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc_enable);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc_info_helper);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc_iterate);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_malloc_usable_size);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_mallopt);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_memalign);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_posix_memalign);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_realloc);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", pthread_attr_destroy);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", pthread_attr_getdetachstate);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", pthread_attr_getguardsize);
