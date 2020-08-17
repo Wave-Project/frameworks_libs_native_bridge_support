@@ -17,8 +17,10 @@
 // clang-format off
 #include "native_bridge_support/vdso/interceptable_functions.h"
 
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(ABinderProcess_handlePolledCommands);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(ABinderProcess_joinThreadPool);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(ABinderProcess_setThreadPoolMaxThreadCount);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(ABinderProcess_setupPolling);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(ABinderProcess_startThreadPool);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AIBinder_Class_define);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AIBinder_Class_setHandleShellCommand);
@@ -110,6 +112,9 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(AParcel_writeUint64Array);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_addService);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_checkService);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_getService);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_isDeclared);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_registerLazyService);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(AServiceManager_waitForService);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_delete);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_deleteDescription);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_fromExceptionCode);
@@ -124,10 +129,14 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_getServiceSpecificError);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_getStatus);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_isOk);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(AStatus_newOk);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(_Z25AIBinder_toPlatformBinderP8AIBinder);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(_Z27AIBinder_fromPlatformBinderRKN7android2spINS_7IBinderEEE);
 
 static void __attribute__((constructor(0))) init_stub_library() {
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", ABinderProcess_handlePolledCommands);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", ABinderProcess_joinThreadPool);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", ABinderProcess_setThreadPoolMaxThreadCount);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", ABinderProcess_setupPolling);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", ABinderProcess_startThreadPool);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AIBinder_Class_define);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AIBinder_Class_setHandleShellCommand);
@@ -219,6 +228,9 @@ static void __attribute__((constructor(0))) init_stub_library() {
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_addService);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_checkService);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_getService);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_isDeclared);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_registerLazyService);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AServiceManager_waitForService);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_delete);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_deleteDescription);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_fromExceptionCode);
@@ -233,5 +245,7 @@ static void __attribute__((constructor(0))) init_stub_library() {
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_getStatus);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_isOk);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", AStatus_newOk);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", _Z25AIBinder_toPlatformBinderP8AIBinder);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libbinder_ndk.so", _Z27AIBinder_fromPlatformBinderRKN7android2spINS_7IBinderEEE);
 }
 // clang-format on
