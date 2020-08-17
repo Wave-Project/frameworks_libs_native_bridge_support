@@ -16,9 +16,8 @@
 
 #include <unistd.h>
 
-#include "native_bridge_support/vdso/vdso.h"
-
 extern void __cxa_finalize(void* dso_handle);
+extern void native_bridge_exit(int status);
 
 void exit(int status) {
   // We don't need to call __cxa_thread_finalize because host "exit" would do that for us.
@@ -29,6 +28,6 @@ void exit(int status) {
   // __cxa_finalize() for host objects, of course).
   // TODO(b/65052237): Fix that with bionic refactoring?
   __cxa_finalize(NULL);
-  ((void (*)(int))(native_bridge_find_proxy_library_symbol("libc.so", "exit")))(status);
+  native_bridge_exit(status);
   __builtin_unreachable();
 }
