@@ -46,6 +46,7 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(freeaddrinfo);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(gai_strerror);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(getaddrinfo);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(longjmp);
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge___cxa_thread_atexit_impl);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(native_bridge_exit);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(pthread_attr_destroy);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(pthread_attr_getdetachstate);
@@ -118,6 +119,7 @@ static void __attribute__((constructor(0))) init_stub_library() {
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", gai_strerror);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", getaddrinfo);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", longjmp);
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge___cxa_thread_atexit_impl);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", native_bridge_exit);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", pthread_attr_destroy);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", pthread_attr_getdetachstate);
