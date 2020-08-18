@@ -30,7 +30,6 @@ cc_library {
         "__cxa_thread_atexit_impl.cpp",
         "__libc_add_main_thread.cpp",
         "exit.c",
-        "fork.cpp",
         "malloc_init.cpp",
     ],
 

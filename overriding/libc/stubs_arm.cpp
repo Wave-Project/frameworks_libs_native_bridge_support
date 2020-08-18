@@ -17,6 +17,7 @@
 // clang-format off
 #include "native_bridge_support/vdso/interceptable_functions.h"
 
+DEFINE_INTERCEPTABLE_STUB_FUNCTION(__clone_for_fork);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__pthread_cleanup_pop);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__pthread_cleanup_push);
 DEFINE_INTERCEPTABLE_STUB_FUNCTION(__system_properties_init);
@@ -88,6 +89,7 @@ DEFINE_INTERCEPTABLE_STUB_FUNCTION(sigsetjmp);
 DEFINE_INTERCEPTABLE_STUB_VARIABLE(environ);
 
 static void __attribute__((constructor(0))) init_stub_library() {
+  INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __clone_for_fork);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __pthread_cleanup_pop);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __pthread_cleanup_push);
   INIT_INTERCEPTABLE_STUB_FUNCTION("libc.so", __system_properties_init);
