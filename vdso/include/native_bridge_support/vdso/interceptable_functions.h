@@ -36,13 +36,13 @@
 
 #elif defined(__aarch64__)
 
-#define INTERCEPTABLE_STUB_ASM_CALL(name)            \
-  extern "C" void __attribute((naked)) name() {      \
-    __asm__ __volatile__("adrp x8, " #name           \
-                         "_var\n"                    \
-                         "ldr x8, [x8, :lo12:" #name \
-                         "_var]\n"                   \
-                         "br x8");                   \
+#define INTERCEPTABLE_STUB_ASM_CALL(name)              \
+  extern "C" void __attribute((naked)) name() {        \
+    __asm__ __volatile__("adrp x16, " #name            \
+                         "_var\n"                      \
+                         "ldr x16, [x16, :lo12:" #name \
+                         "_var]\n"                     \
+                         "br x16");                    \
   }
 
 #else
