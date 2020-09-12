@@ -63,16 +63,14 @@ NATIVE_BRIDGE_ORIG_GUEST_LIBS := \
 NATIVE_BRIDGE_ORIG_GUEST_LIBS += \
     libandroidicu.bootstrap
 
-# TODO(b/137072946): enable to build renderscript!
-#
-#NATIVE_BRIDGE_PRODUCT_PACKAGES += \
-#    libclcore.bc \
-#    libclcore_neon.bc
-#
-#NATIVE_BRIDGE_ORIG_GUEST_LIBS += \
-#    libRS \
-#    libRSDriver \
-#    libRSSupport \
+NATIVE_BRIDGE_PRODUCT_PACKAGES += \
+    libclcore.bc \
+    libclcore_neon.bc
+
+NATIVE_BRIDGE_ORIG_GUEST_LIBS += \
+    libRS \
+    libRSDriver \
+    libnative_bridge_guest_libRSSupport
 
 # These native libraries are needed to pass CtsJniTestCases, we do not use them in any way and
 # once/if build system allows us to build dummy arm libraries they can be replaced with empty ones.
@@ -80,7 +78,7 @@ NATIVE_BRIDGE_ORIG_GUEST_LIBS += \
 #    libart \
 #    libvorbisidec
 
-
+# These libraries need special support on the native bridge implementation side.
 NATIVE_BRIDGE_MODIFIED_GUEST_LIBS := \
     libaaudio \
     libamidi \
