@@ -66,6 +66,12 @@ cc_library {
             ],
 
             version_script: ":libc.arm.map",
+            no_libcrt: true,
+
+            shared: {
+                // For backwards-compatibility, some arm32 builtins are exported from libc.so.
+                static_libs: ["libclang_rt.builtins-arm-android-exported"],
+            },
 
             // Arm 32 bit does not produce complete exidx unwind information
             // so keep the .debug_frame which is relatively small and does
